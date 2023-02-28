@@ -8,6 +8,17 @@ public class texture {
     private String loc;
     public final int SIZE;
 
+    public void load(){
+        try{
+            BufferedImage image = ImageIO.read(new File(loc));
+            int w = image.getWidth();
+            int h = image.getHeight();
+            image.getRGB(0, 0, w, h, pixels, 0, w);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
 
 
     public texture(String location, int size){
@@ -16,15 +27,11 @@ public class texture {
         pixels = new int[SIZE * SIZE];
         load();
     }
-public void load(){
-    try{
-        BufferedImage image = ImageIO.read(new File(loc));
-        int w = image.getWidth();
-        int h = image.getHeight();
-        image.getRGB(0, 0, w, h, pixels, 0, w);
-    }catch(IOException e){
-        e.printStackTrace();
-    }
 
-}
+    public static texture wood = new texture("testTexture/Wood.png", 128);
+    public static texture brick = new texture("testTexture/Brick.png", 128);
+    public static texture Grass = new texture("testTexture/Grass.png", 128);
+
+
+
 }

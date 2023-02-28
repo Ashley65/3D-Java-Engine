@@ -1,10 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.Serial;
+import java.util.ArrayList;
+
+import static java.lang.Math.*;
+
 
 public class Game extends JFrame implements Runnable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -96,6 +103,7 @@ public class Game extends JFrame implements Runnable {
             lastTime = now;
             while (delta >= 1) {
                 // Handles the updates
+                camera.update(map);
                 update();
                 updates++;
                 delta--;
@@ -112,6 +120,75 @@ public class Game extends JFrame implements Runnable {
 
 
         }
+
+    }
+
+    public ArrayList<texture> textures;
+    public void loadTextures(){
+        textures = new ArrayList<texture>();
+        textures.add(new texture("testTexture/Wood.png", 128));
+        textures.add(new texture("testTexture/Brick.png", 128));
+        textures.add(new texture("testTexture/Grass.png", 128));
+    }
+    public Camera camera;{
+        camera = new Camera(22, 12, 5, -1, 0, 0, 0, 0.66, 0) {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                addKeyListener(camera);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if ((e.getKeyCode() == KeyEvent.VK_LEFT)) {
+                    left = true;
+
+
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_RIGHT)) {
+                    right = true;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_UP)) {
+                    forward = true;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_DOWN)) {
+                    back = true;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_W)) {
+                    up = true;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_S)) {
+                    down = true;
+                }
+
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if ((e.getKeyCode() == KeyEvent.VK_LEFT)) {
+                    left = false;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_RIGHT)) {
+                    right = false;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_UP)) {
+                    forward = false;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_DOWN)) {
+                    back = false;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_W)) {
+                    up = false;
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_S)) {
+                    down = false;
+                }
+
+
+
+            }
+
+        };
     }
 
 
