@@ -188,8 +188,15 @@ public class Game extends JFrame implements Runnable {
 
             }
 
+
         };
+
     }
+    public screen Screen;{
+        Screen = new screen(WIDTH, HEIGHT, new int[WIDTH * HEIGHT], new double[WIDTH * HEIGHT], 640, 480);
+
+    }
+
 
 
 }
