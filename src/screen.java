@@ -13,7 +13,7 @@ public class screen {
     public int[] tiles;
     public int[] tileColors;
 
-    public ArrayList texture;
+    public ArrayList textures;
 
     public screen(int[][] map, int mapWidth, int mapHeight, int mapScale, int WIDTH, int HEIGHT, int FOV, int renderDistance, int[] pixels, int[] colors, int[] tiles, int[] tileColors, ArrayList texture){
         this.map = map;
@@ -28,7 +28,7 @@ public class screen {
         this.colors = colors;
         this.tiles = tiles;
         this.tileColors = tileColors;
-        this.texture = texture;
+        this.textures = texture;
     }
 
     public screen(int width, int height, int[] ints, double[] doubles, int width1, int height1) {
@@ -118,6 +118,23 @@ public class screen {
                 wallX = camera.zPos + ((mapz - camera.zPos + (1 - stepZ) / 2) / rayDirZ) * rayDirX;
             }
             wallX -= Math.floor(wallX);
+
+            int texX = (int)  wallX  ;
+            if(side == 0 && rayDirX > 0) texX = textures.get(texNum).getSize() - texX - 1;
+            if(side == 1 && rayDirY < 0) texX = textures.get(texNum).SIZE - texX - 1;
+
+            for(int y = drawStart; y < drawEnd; y++){
+                int d = y * 256 - HEIGHT * 128 + lineHeight * 128;
+
+                int blob = textures.get(0).
+
+
+
+                int texY = ( (d *  textures.get(texNum).SIZE  ) / lineHeight) / 256;
+                int color = textures.get(texNum).pixels[texX + (texY * textures.get(texNum).SIZE)];
+                if (side == 1) color = (color >> 1) & 8355711;
+                pixels[x + y * WIDTH] = color;
+            }
 
 
 

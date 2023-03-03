@@ -6,7 +6,8 @@ import javax.imageio.ImageIO;
 public class texture {
     public int[] pixels;
     private String loc;
-    public final int SIZE;
+
+    private int size;
 
     public void load(){
         try{
@@ -21,10 +22,10 @@ public class texture {
 
 
 
-    public texture(String location, int size){
+    public texture(String location, int size) {
         loc = location;
-        SIZE = size;
-        pixels = new int[SIZE * SIZE];
+        this.size = size;
+        pixels = new int[size * size];
         load();
     }
 
@@ -33,5 +34,11 @@ public class texture {
     public static texture Grass = new texture("testTexture/Grass.png", 128);
 
 
+    public int getSize() {
+        return size;
+    }
 
+    public void setSize(int size) {
+        this.size = size;
+    }
 }
